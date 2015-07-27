@@ -12,5 +12,3 @@ def sendMessageToServer(productID,killReadOrCreate=0, corporateMessage= "Access 
     server.sendall(bytes(msg,"UTF-8"))
 
 sendMessageToServer("123",0)
-
-

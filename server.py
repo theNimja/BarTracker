@@ -28,8 +28,8 @@ while True:
     if (splitted[0]=="0"):
         data = {"productID":splitted[2],"accessFrom":splitted[1], "message":splitted[3]}
         print("Access to product "+data["productID"]+"  from "+data["accessFrom"]+", message is "+data["message"])
-        fobj = open(data["productID"]+".txt", "w")
+        fobj = open("data/"+data["productID"]+".txt", "w")
         
-        stringToWrite=str(datetime.time.hour)+":"+str(datetime.time.minute)+":"+str(datetime.time.second)+" "+str(datetime.date.day)+"/"+str(datetime.date.month)+"/"+str(datetime.date.year)+" "+data["accessFrom"]+" "+data["message"].replace(" ","_")
+        stringToWrite=datetime.datetime.now()+" "+data["accessFrom"]+" "+data["message"].replace(" ","_")
         fobj.write(stringToWrite)
         fobj.close()

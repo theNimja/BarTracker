@@ -1,1 +1,0 @@
-<attribute 'hour' of 'datetime.time' objects>:<attribute 'minute' of 'datetime.time' objects>:<attribute 'second' of 'datetime.time' objects> <attribute 'day' of 'datetime.date' objects>/<attribute 'month' of 'datetime.date' objects>/<attribute 'year' of 'datetime.date' objects> Nimja-TOSH@137.50.196.77 Access_from_user
