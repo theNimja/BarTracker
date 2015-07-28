@@ -19,7 +19,6 @@ sendMessageToServer("123")
 
 
 numLines= server.recv(1024)
-print(str(numLines))
 if (str(numLines)=="b'ERROR'"):
     print("This item does not exist.Please try again.")
 else:
@@ -31,16 +30,14 @@ else:
         buffer.append(str(reply,"UTF-8"))
     server.close()
 
+     
+    thing = buffer[0]
+    buffer.pop(0)
+    print ("This product:"+str(thing))#Later say item code
     buffer= list(reversed(buffer))
     for i in range (len(buffer)) :
-        if (i==len(buffer)-1):
-            thing = buffer
-            print ("This product:"+str(thing))#Later say item code
-        else:
-            print(buffer)
-            setData= buffer[i].split(" ")
-            print(str(setData))
-            print(str(i+1)+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
+        setData= buffer[i].split(" ")
+        print(str(i+1)+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
 
 
 input()
