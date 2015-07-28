@@ -14,8 +14,13 @@ def sendMessageToServer(productID,corporateMessage= "Access from user"):
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.connect((ip,8888))
-sendMessageToServer("123")
+server.connect(("https://warm-depths-1688.herokuapp.com",8000))
+cod = "wefg"
+while (not cod.isdigit()):
+    print("What code do we access")
+    cod= input()
+
+sendMessageToServer(str(cod))
 
 
 numLines= server.recv(1024)

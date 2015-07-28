@@ -3,7 +3,7 @@ import os,socket,datetime,sys
 
 
 HOST = ""   # Symbolic name, meaning all available interfaces
-PORTNUM = 8888 # Arbitrary non-privileged port
+PORTNUM = 8000 # Arbitrary non-privileged port
 port = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     port.bind((HOST, PORTNUM))#

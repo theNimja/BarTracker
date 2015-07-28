@@ -18,7 +18,7 @@ thingy = input()
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.connect((ip,8888))
+server.connect(("warm-depths-1688.herokuapp.com",8000))
 sendMessageToServer(cod)
 time.sleep(10)
 
