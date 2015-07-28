@@ -29,22 +29,26 @@ while True:
     splitted= message.split(",")
     data={}
     if (splitted[0]=="0"):
+        
         data = {"productID":splitted[2],"accessFrom":splitted[1], "message":splitted[3]}
         print("Access to product "+data["productID"]+"  from "+data["accessFrom"]+", message is "+data["message"])
-        fobj = open("data/"+data["productID"]+".txt", "a")
-        stringToWrite=str(datetime.datetime.now())+" "+data["accessFrom"]+" "+data["message"].replace(" ","_")
-        fobj.write(stringToWrite+"\n")
-        fobj.close()
-        fbin = open("data/"+data["productID"]+".txt","r")
-        mulligans= fbin.readlines()
-        fbin.close()
-        print(str(mulligans))
-        print(str(len(mulligans)))
-        length = len(mulligans)
-        conn.sendall(bytes(str(length),"UTF-8"))
-        for i in mulligans:
-            print("sending "+i)
-            conn.send(bytes(i,"UTF-8"))
-        fbin.close()
-        
+        if (os.path.isfile("data/"+data["productID"]+".txt") ): 
+            fobj = open("data/"+data["productID"]+".txt", "a")
+            stringToWrite=str(datetime.datetime.now())+" "+data["accessFrom"]+" "+data["message"].replace(" ","_")
+            fobj.write(stringToWrite+"\n")
+            fobj.close()
+            fbin = open("data/"+data["productID"]+".txt","r")
+            mulligans= fbin.readlines()
+            fbin.close()
+            print(str(mulligans))
+            print(str(len(mulligans)))
+            length = len(mulligans)
+            conn.sendall(bytes(str(length),"UTF-8"))
+            for i in mulligans:
+                print("sending "+i)
+                conn.send(bytes(i,"UTF-8"))
+            fbin.close()
+        else:
+            conn.sendall(bytes("ERROR","UTF-8"))
+    #out of checking on wat do
     conn.close()
