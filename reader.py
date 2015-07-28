@@ -1,7 +1,7 @@
 import os,socket,time
 ip = socket.gethostbyname(socket.gethostname())
 #killReadOrCreate , 0= read, 1= kill,2= create
-# can go to 2147483647
+# can go to 2147483647 usingf 32 bits
 
 
 
@@ -20,11 +20,17 @@ sendMessageToServer("123",0)
 
 numLines= server.recv(1024)
 numLines=int(numLines)
-print(str(numLines))
 
 buffer=[]
-for i in range(numlines):
+for i in range(numLines):
     reply= server.recv(1024)
-    buffer.append(string(reply,"UTF-8"))
-print(buffer)
+    buffer.append(str(reply,"UTF-8"))
+server.close()
+
+buffer= list(reversed(buffer))
+for i in range (len(buffer)) :
+    setData= buffer[i].split(" ")
+    print(str()+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
+
+
 input()
