@@ -1,4 +1,4 @@
-import os,socket,time
+import os,socket
 ip = socket.gethostbyname(socket.gethostname())
 #killReadOrCreate , 0= read, 1= kill,2= create
 # can go to 2147483647 usingf 32 bits
@@ -6,16 +6,16 @@ ip = socket.gethostbyname(socket.gethostname())
 
 
 
-def sendMessageToServer(productID,killReadOrCreate=0, corporateMessage= "Access from user"):
+def sendMessageToServer(productID,corporateMessage= "Access from user"):
     userName = socket.gethostname()+"@"+ip
-    msg = str(killReadOrCreate)+","+userName+","+str(productID)+","+corporateMessage
+    msg = str(0)+","+userName+","+str(productID)+","+corporateMessage
     print(msg)
     server.sendall(bytes(msg,"UTF-8"))
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((ip,8888))
-sendMessageToServer("123",0)
+sendMessageToServer("123")
 
 
 numLines= server.recv(1024)
@@ -33,8 +33,14 @@ else:
 
     buffer= list(reversed(buffer))
     for i in range (len(buffer)) :
-        setData= buffer[i].split(" ")
-        print(str()+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
+        if (i==len(buffer)-1):
+            thing = buffer
+            print ("This product:"+str(thing))#Later say item code
+        else:
+            print(buffer)
+            setData= buffer[i].split(" ")
+            print(str(setData))
+            print(str(i+1)+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
 
 
 input()

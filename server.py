@@ -40,8 +40,6 @@ while True:
             fbin = open("data/"+data["productID"]+".txt","r")
             mulligans= fbin.readlines()
             fbin.close()
-            print(str(mulligans))
-            print(str(len(mulligans)))
             length = len(mulligans)
             conn.sendall(bytes(str(length),"UTF-8"))
             for i in mulligans:
@@ -50,5 +48,18 @@ while True:
             fbin.close()
         else:
             conn.sendall(bytes("ERROR","UTF-8"))
+
+    if (splitted[0]=="1"):
+        data = {"productID":splitted[2],"accessFrom":splitted[1], "message":splitted[3]}
+        print("Creation of  product "+data["productID"]+"  from "+data["accessFrom"]+", message is "+data["message"])
+        if (not os.path.isfile("data/"+data["productID"]+".txt") ):
+            fobj = open("data/"+data["productID"]+".txt", "a")
+            thingmajig = conn.recv(1024)
+            fobj.write(str(thingmajig)[2:len(str(thingmajig))-1]+"\n")
+            stringToWrite=str(datetime.datetime.now())+" "+data["accessFrom"]+" "+data["message"].replace(" ","_")
+            fobj.write(stringToWrite+"\n")
+            fobj.close()
+        else:
+            print("File exists, not valid")
     #out of checking on wat do
     conn.close()
