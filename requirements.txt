@@ -1,1 +1,1 @@
-Beautifulsoup == 4.4.0
+Beautifulsoup == 3.2.1
