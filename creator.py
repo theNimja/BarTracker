@@ -1,4 +1,4 @@
-import os,socket,time
+import os,socket,time,urllib.request
 ip = socket.gethostbyname(socket.gethostname())
 
 
@@ -24,3 +24,7 @@ time.sleep(10)
 
 server.sendall(bytes(thingy, "UTF-8"))
 server.close()
+
+searchPage="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + str(cod)
+urllib.request.urlretrieve(searchPage ,os.getcwd()+"/"+"QR.png")
+

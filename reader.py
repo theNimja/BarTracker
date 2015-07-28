@@ -1,6 +1,6 @@
 import os,socket
 ip = socket.gethostbyname(socket.gethostname())
-#killReadOrCreate , 0= read, 1= kill,2= create
+#killReadOrCreate , 0= read, 2= kill,1= create
 # can go to 2147483647 usingf 32 bits
 
 
@@ -37,7 +37,7 @@ else:
     buffer= list(reversed(buffer))
     for i in range (len(buffer)) :
         setData= buffer[i].split(" ")
-        print(str(i+1)+"Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
+        print(str(i+1)+":Access from  "+str(setData[2])+" on "+str(setData[1])+" at "+str(setData[0])+"("+str(setData[3]).replace("_"," ")+")")
 
 
 input()
