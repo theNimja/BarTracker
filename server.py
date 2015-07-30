@@ -1,12 +1,11 @@
-import os,socket,datetime,sys
-
+import os,socket,datetime,sys,time
 
 
 HOST = ""   # Symbolic name, meaning all available interfaces
 PORTNUM = 8000 # Arbitrary non-privileged port
 port = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
-    port.bind((HOST, PORTNUM))#
+    port.bind((HOST, PORTNUM))
 except socket.error as msg:
     print ('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
     sys.exit()
@@ -15,16 +14,26 @@ message = None
 
 message=port.listen(10)
 print ('Socket now listening')
- 
+os.system('serverAssist.py')
 #now keep talking with the client
 while True:
+    for filename in os.listdir ("data/"):
+        lastTime=os.path.getmtime("data/"+filename)
+        if (lastTime<=time.time()-(60)):
+            os.remove("data/"+filename)
+            print("deleted!")
     while True:
         #wait to accept a connection
-        conn, addr = port.accept()
-        print ('Connected with ' + addr[0] + ':' + str(addr[1]))
-        message=conn.recv(1024)
-        break;
+        try:
+            conn, addr = port.accept()
+            print ('Connected with ' + addr[0] + ':' + str(addr[1]))
+            message=conn.recv(1024)
+            break;
+        except:
+            print("")
+        
     message = str(message)
+    print (message)
     message= message [2:len(message)-1]
     splitted= message.split(",")
     data={}
@@ -61,5 +70,9 @@ while True:
             fobj.close()
         else:
             print("File exists, not valid")
+
+
+   
     #out of checking on wat do
     conn.close()
+    print("Closed")

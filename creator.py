@@ -1,4 +1,4 @@
-import os,socket,time,urllib.request
+import os,socket,time,urllib.request,time
 ip = socket.gethostbyname(socket.gethostname())
 
 
@@ -18,12 +18,18 @@ thingy = input()
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.connect(("warm-depths-1688.herokuapp.com",8000))
-sendMessageToServer(cod)
-time.sleep(10)
-
+server.connect((ip,8000))
+caks= ""
+if (os.path.isfile("corporateMessage"+".txt") ):
+    f= open("corporateMessage.txt")
+    caks=f.readline()
+if not caks == "":
+    sendMessageToServer(cod,caks)
+else:
+     sendMessageToServer(cod)   
+time.sleep(1)
 server.sendall(bytes(thingy, "UTF-8"))
+
 server.close()
 
-searchPage="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + str(cod)
-urllib.request.urlretrieve(searchPage ,os.getcwd()+"/"+"QR.png")
+input()
